@@ -1,0 +1,36 @@
+IMG_SIZE : 768
+DEF_SIZE : 1024
+MEAN: [0.485, 0.456, 0.406]
+STD: [0.229, 0.224, 0.225]
+BATCH_SIZE: 6
+N_WORKERS: 10
+N_EPOCHS: 50
+LOGS_PATH: './logs/'
+SNAPSHOTS_PATH: './snapshots/'
+MODEL_ALIAS: 'se_resnext50_32x4d'
+TRAIN_IMG_ROOT: './png/train/'
+TEST_IMG_ROOT: './png/test/'
+ANN_PICKLE_PATH: './annotation/rle_dict.pickle'
+TRAIN_PICKLE_PATH: './annotation/train_2.pickle'
+VAL_PICKLE_PATH: './annotation/val_2.pickle'
+TEST_PICKLE_PATH: './annotation/test.pickle'
+DEVICE: "cuda:0"
+SIGM_THR: 0.5
+CUR_SNAPSHOT: False
+dataset_class: SegDataset
+
+optimizer: Adam
+optimizer_params: 
+    lr: 0.0001
+    
+scheduler: MultiStepLR
+scheduler_params:
+    milestones: [15,25,35]
+    gamma: 0.1
+    
+loss: BCEWithLogitsLoss
+loss_params:
+    reduction: 'mean'
+
+smooth: 1
+
